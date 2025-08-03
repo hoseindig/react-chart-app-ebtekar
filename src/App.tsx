@@ -26,9 +26,9 @@ function App() {
       {charts.map((chart, index) => (
         <Box
           key={index}
-          mb={4}
+          // mb={4}
           p={3}
-          boxShadow={3}
+          // boxShadow={3}
           borderRadius={2}
           bgcolor="#fff"
         >
