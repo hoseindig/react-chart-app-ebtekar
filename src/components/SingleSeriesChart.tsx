@@ -1,4 +1,5 @@
-import { useEffect, useRef } from "react";
+// SingleSeriesChart.tsx
+import { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 
 type Props = {
@@ -6,26 +7,40 @@ type Props = {
 };
 
 const SingleSeriesChart = ({ data }: Props) => {
-  const ref = useRef<SVGSVGElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const svgRef = useRef<SVGSVGElement | null>(null);
+  const [width, setWidth] = useState<number>(0);
+  const height = 300;
 
   useEffect(() => {
+    if (!containerRef.current) return;
+    const observer = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        setWidth(entry.contentRect.width);
+      }
+    });
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!width || !svgRef.current) return;
+
     const validData = data.filter(([, value]) => value !== null) as [
       number,
       number
     ][];
 
-    const width = 500;
-    const height = 300;
     const margin = { top: 20, right: 30, bottom: 30, left: 40 };
+    const innerWidth = width - margin.left - margin.right;
+    const innerHeight = height - margin.top - margin.bottom;
 
-    const svg = d3.select(ref.current);
+    const svg = d3.select(svgRef.current);
     svg.selectAll("*").remove();
 
     const x = d3
       .scaleLinear()
-      .domain(
-        d3.extent(validData, (d: [number, number]) => d[0]) as [number, number]
-      )
+      .domain(d3.extent(validData, (d) => d[0]) as [number, number])
       .range([margin.left, width - margin.right]);
 
     const y = d3
@@ -53,12 +68,16 @@ const SingleSeriesChart = ({ data }: Props) => {
       .append("path")
       .datum(validData)
       .attr("fill", "none")
-      .attr("stroke", "steelblue")
-      .attr("stroke-width", 1.5)
+      .attr("stroke", "#1976d2") // MUI primary
+      .attr("stroke-width", 2)
       .attr("d", line);
-  }, [data]);
+  }, [width, data]);
 
-  return <svg ref={ref} width={500} height={300}></svg>;
+  return (
+    <div ref={containerRef} style={{ width: "100%" }}>
+      <svg ref={svgRef} width={width} height={height} />
+    </div>
+  );
 };
 
 export default SingleSeriesChart;

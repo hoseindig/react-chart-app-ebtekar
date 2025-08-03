@@ -1,5 +1,7 @@
+// ChartWrapper.tsx
 import SingleSeriesChart from "./SingleSeriesChart";
 import MultiSeriesChart from "./MultiSeriesChart";
+import { Paper, Typography } from "@mui/material";
 
 type Props = {
   chart: {
@@ -12,14 +14,16 @@ const ChartWrapper = ({ chart }: Props) => {
   const isMultiSeries = Array.isArray(chart.data[0][1]);
 
   return (
-    <div style={{ marginBottom: "2rem" }}>
-      <h2>{chart.title}</h2>
+    <Paper elevation={3} sx={{ padding: 2, marginBottom: 4, borderRadius: 2 }}>
+      <Typography variant="h6" gutterBottom>
+        {chart.title}
+      </Typography>
       {isMultiSeries ? (
         <MultiSeriesChart data={chart.data as [number, (number | null)[]][]} />
       ) : (
         <SingleSeriesChart data={chart.data as [number, number | null][]} />
       )}
-    </div>
+    </Paper>
   );
 };
 
