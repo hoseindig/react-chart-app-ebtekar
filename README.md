@@ -1,46 +1,84 @@
-# Getting Started with Create React App
+# 📈 React D3 Chart Renderer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A technical frontend test project built with **React** and **D3.js**.  
+It dynamically renders multiple charts based on external JSON data input — supporting both single-series and multi-series line charts.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Features
 
-### `npm start`
+- 🧠 **Auto chart-type detection** (single or multi-series)
+- 📊 **D3 line chart rendering**
+  - Single-series: 1 line
+  - Multi-series: 3 colored lines (blue, green, red)
+- ⚠️ **Handles `null` values gracefully**
+- 🧩 **Modular component structure**
+- 🗂️ Dynamic loading of all charts in the dataset
+- 📝 Clean, maintainable code (TypeScript)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+ 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+ 
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 📥 Getting Started
 
-### `npm run build`
+### 1. Clone the repo
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+git clone https://github.com/your-username/react-d3-chart-renderer.git
+cd react-d3-chart-renderer
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Install dependencies
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Using Yarn:
 
-### `npm run eject`
+yarn install
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Or with npm:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+npm install
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+3. Run the app locally
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+yarn dev
 
-## Learn More
+Then open http://localhost:5173 in your browser.
+🧪 Sample Data Format
+Single-Series Chart
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+{
+  "title": "Single Series Example",
+  "data": [[0, 12], [1, null], [2, 34]]
+}
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Multi-Series Chart
+
+{
+  "title": "Multi Series Example",
+  "data": [[0, [10, 20, 30]], [1, [null, 25, 35]], [2, [15, null, 40]]]
+}
+
+✅ Test Criteria Checklist
+
+Reads data.json correctly
+
+Automatically detects chart type
+
+Renders charts using D3
+
+Skips null values appropriately
+
+Titles displayed above charts
+
+    Modular, maintainable codebase
+
+🛠️ Built With
+
+    React
+
+    D3.js
+
+    TypeScript
+
+    Vite for fast dev build
