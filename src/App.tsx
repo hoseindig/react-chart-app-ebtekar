@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ChartWrapper from "./components/ChartWrapper";
+import { Container, Typography, Box, Divider } from "@mui/material";
 
 type ChartData = {
   title: string;
@@ -17,11 +18,24 @@ function App() {
   }, []);
 
   return (
-    <div style={{ padding: 20 }}>
+    <Container maxWidth="md" sx={{ py: 4 }}>
+      <Typography variant="h4" gutterBottom textAlign="center">
+        نمودارهای آماری
+      </Typography>
+      <Divider sx={{ mb: 4 }} />
       {charts.map((chart, index) => (
-        <ChartWrapper key={index} chart={chart} />
+        <Box
+          key={index}
+          mb={4}
+          p={3}
+          boxShadow={3}
+          borderRadius={2}
+          bgcolor="#fff"
+        >
+          <ChartWrapper chart={chart} />
+        </Box>
       ))}
-    </div>
+    </Container>
   );
 }
 
